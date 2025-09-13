@@ -5,4 +5,4 @@ tgcrypto
 pillow
 requests
 telebot
-pycfonts
+
