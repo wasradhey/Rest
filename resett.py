@@ -8,7 +8,7 @@ import telebot
 import time
 import json
 from telebot import types
-from cfonts import render
+
 
 # Initialize bot with your token
 bot = telebot.TeleBot("8451495689:AAHNt7S9FW7KB2fClL6_Ws_frXR2vpx04JQ")
