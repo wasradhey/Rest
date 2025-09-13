@@ -24,21 +24,7 @@ CHANNEL_LINK = f"https://t.me/{CHANNEL_USERNAME}"
 
 # Global dictionary to track ongoing operations
 ongoing_operations = {}
-from flask import Flask
-from threading import Thread
 
-
-app = Flask('')
-
-@app.route('/')
-def home():
-    return "Bot is running"
-
-def run_flask():
-    app.run(host='0.0.0.0', port=8080)
-
-def keep_alive():
-    Thread(target=run_flask).start()
 # Initialize Pyrogram client
 app = Client(
     "instagram_reset_bot",
@@ -386,6 +372,7 @@ Moving to next account...
 """
     await processing_msg.edit_text(final_message, parse_mode=ParseMode.MARKDOWN)
 
+# Fixed filter syntax
 @app.on_message(filters.text & ~filters.command)
 async def handle_text_messages(client, message: Message):
     # Check if this is a response to a previous command
@@ -434,7 +421,12 @@ async def main():
     await app.start()
     await asyncio.sleep(1)
     print("Bot started successfully!")
-    await asyncio.Event().wait()
+    await idle()
+
+async def idle():
+    # This keeps the bot running
+    while True:
+        await asyncio.sleep(1)
 
 if __name__ == "__main__":
     asyncio.run(main())
